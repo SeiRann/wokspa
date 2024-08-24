@@ -4,9 +4,14 @@ import Image from "next/image"
 import Arrow from "@/app/client/images/arrow.js"
 import { useEffect, useState } from "react"
 
+type Ingredient = {
+  name:string,
+  image:string
+}
+
 interface IngredientSelectProps {
     optionTitle: string
-    options: string[],
+    options: Ingredient[],
 }
   
 const IngredientSelect: React.FC<IngredientSelectProps> = ({ optionTitle, options}) => {
@@ -24,10 +29,18 @@ const IngredientSelect: React.FC<IngredientSelectProps> = ({ optionTitle, option
         </div>
         <div className={style.SelectGrid}>
           {options.map((option)=>{
-            return <div className={style.SelectOption} key={option}>
-              {option}
-            </div>
-          })}
+            const optionId=`${optionTitle}-${option.name}`
+            return  <div className={style.SelectOption} key={option.name}>
+                    <div className={style.RadioBox}> 
+                      <input type="radio" id={optionId} name={optionTitle} value={option.name}/>
+                    </div>
+                      <label htmlFor={optionId}>
+                      <img src={option.image} alt="image" />
+                      {/* <Image width={64} height={64} src={option.image} alt={"image"}/> */}
+                        {option.name}
+                      </label>
+                    </div>
+            })}
         </div>
       </div>
     );
@@ -35,18 +48,26 @@ const IngredientSelect: React.FC<IngredientSelectProps> = ({ optionTitle, option
   
 
 const IngredientMenu:React.FC = () => {
-    return(
-        <div className={style.IngredientDiv}>
-            <h1>Ingredients</h1>
-            <div className={style.IngredientStack}>
-                <IngredientSelect optionTitle="Noodles" options={["option1","option2","option3","option4", "option5"]}/>
-                <IngredientSelect optionTitle="Noodles" options={["option1","option2","option3","option4"]}/>
-                <IngredientSelect optionTitle="Noodles" options={["option1","option2","option3","option4"]}/>
-                <IngredientSelect optionTitle="Noodles" options={["option1","option2","option3","option4"]}/>
 
-            </div>
-        </div>
-    )
+
+  return(
+      <div className={style.IngredientDiv}>
+          <h1>Ingredients</h1>
+          <div className={style.IngredientStack}>
+            <IngredientSelect optionTitle="Noodles" options={[
+              {name:"Udon",image:"https://t3.ftcdn.net/jpg/04/56/56/40/360_F_456564043_KPEsWw092VbLwWYHtSgoXc31ziwnnbXL.jpg"},
+              {name:"Rice",image:"https://media.istockphoto.com/id/1204350696/photo/raw-dry-rice-noodles-traditional-asian-rice-vermicelli.jpg?s=612x612&w=0&k=20&c=jHZqTTnNuOc27cwtpAByKT_ZoSivQ47lzFcJXzIdOic="},
+              {name:"Soba",image:"https://media.istockphoto.com/id/484235030/photo/soba-noodles-isolated-on-white.jpg?s=612x612&w=0&k=20&c=1ab-MwEWcukLit60IGyLFViCtgjjMvPeGRfIIBuphRw="},
+              {name:"Grain",image:"https://png.pngtree.com/png-clipart/20240220/original/pngtree-instant-noodles-on-white-background-wheat-photo-png-image_14361212.png"}
+              ]}/>
+            
+            
+            <IngredientSelect optionTitle="Noodless" options={[{name:"Option1",image:"image"},{name:"Option2",image:"image"},{name:"Option3",image:"image"},{name:"Option4",image:"image"}]}/>
+            <IngredientSelect optionTitle="Noodlesss" options={[{name:"Option1",image:"image"},{name:"Option2",image:"image"},{name:"Option3",image:"image"},{name:"Option4",image:"image"}]}/>
+            <IngredientSelect optionTitle="Noodlessss" options={[{name:"Option1",image:"image"},{name:"Option2",image:"image"},{name:"Option3",image:"image"},{name:"Option4",image:"image"}]}/>
+          </div>
+      </div>
+  )
 }
 
 export default IngredientMenu
