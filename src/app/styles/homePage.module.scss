@@ -1,0 +1,12 @@
+.MainDiv{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    gap:50px;
+    min-height:500px;
+
+    .Wok{
+        width:500px;
+        height: 500px;
+    }
+}

@@ -1,8 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import style from "@/app/styles/ingredientmenu.module.scss"
-import Image from "next/image"
-import Arrow from "@/app/client/images/arrow.js"
-import { useEffect, useState } from "react"
+import Arrow from "../../../../public/images/arrow.js"
+import { useState } from "react"
 
 type Ingredient = {
   name:string,
@@ -47,6 +47,20 @@ const IngredientSelect: React.FC<IngredientSelectProps> = ({ optionTitle, option
   };
   
 
+
+const IngredientInfo = [
+  {name:"Udon",image:"https://t3.ftcdn.net/jpg/04/56/56/40/360_F_456564043_KPEsWw092VbLwWYHtSgoXc31ziwnnbXL.jpg"},
+  {name:"Rice",image:"https://media.istockphoto.com/id/1204350696/photo/raw-dry-rice-noodles-traditional-asian-rice-vermicelli.jpg?s=612x612&w=0&k=20&c=jHZqTTnNuOc27cwtpAByKT_ZoSivQ47lzFcJXzIdOic="},
+  {name:"Soba",image:"https://media.istockphoto.com/id/484235030/photo/soba-noodles-isolated-on-white.jpg?s=612x612&w=0&k=20&c=1ab-MwEWcukLit60IGyLFViCtgjjMvPeGRfIIBuphRw="},
+  {name:"Grain",image:"https://png.pngtree.com/png-clipart/20240220/original/pngtree-instant-noodles-on-white-background-wheat-photo-png-image_14361212.png"}
+]
+const IngredientExample = [
+  {name:"Option1",image:"image"},
+  {name:"Option2",image:"image"},
+  {name:"Option3",image:"image"},
+  {name:"Option4",image:"image"}
+]
+
 const IngredientMenu:React.FC = () => {
 
 
@@ -54,17 +68,14 @@ const IngredientMenu:React.FC = () => {
       <div className={style.IngredientDiv}>
           <h1>Ingredients</h1>
           <div className={style.IngredientStack}>
-            <IngredientSelect optionTitle="Noodles" options={[
-              {name:"Udon",image:"https://t3.ftcdn.net/jpg/04/56/56/40/360_F_456564043_KPEsWw092VbLwWYHtSgoXc31ziwnnbXL.jpg"},
-              {name:"Rice",image:"https://media.istockphoto.com/id/1204350696/photo/raw-dry-rice-noodles-traditional-asian-rice-vermicelli.jpg?s=612x612&w=0&k=20&c=jHZqTTnNuOc27cwtpAByKT_ZoSivQ47lzFcJXzIdOic="},
-              {name:"Soba",image:"https://media.istockphoto.com/id/484235030/photo/soba-noodles-isolated-on-white.jpg?s=612x612&w=0&k=20&c=1ab-MwEWcukLit60IGyLFViCtgjjMvPeGRfIIBuphRw="},
-              {name:"Grain",image:"https://png.pngtree.com/png-clipart/20240220/original/pngtree-instant-noodles-on-white-background-wheat-photo-png-image_14361212.png"}
-              ]}/>
-            
-            
-            <IngredientSelect optionTitle="Noodless" options={[{name:"Option1",image:"image"},{name:"Option2",image:"image"},{name:"Option3",image:"image"},{name:"Option4",image:"image"}]}/>
-            <IngredientSelect optionTitle="Noodlesss" options={[{name:"Option1",image:"image"},{name:"Option2",image:"image"},{name:"Option3",image:"image"},{name:"Option4",image:"image"}]}/>
-            <IngredientSelect optionTitle="Noodlessss" options={[{name:"Option1",image:"image"},{name:"Option2",image:"image"},{name:"Option3",image:"image"},{name:"Option4",image:"image"}]}/>
+            <IngredientSelect optionTitle="Noodles" options={IngredientInfo}/>
+            <IngredientSelect optionTitle="Mushrooms" options={IngredientExample}/>
+            <IngredientSelect optionTitle="Vegetables" options={IngredientExample}/>
+            <IngredientSelect optionTitle="Sauces" options={IngredientExample}/>
+            <div className={style.IngredientStackButtons}>
+              <button className={style.ResetButton}>Reset</button>
+              <button className={style.OrderButton}>Order</button>
+            </div>
           </div>
       </div>
   )

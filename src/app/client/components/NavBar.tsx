@@ -1,5 +1,4 @@
 'use client'
-import noodles from "../images/noodles.png"
 import Image from "next/image"
 import Link from "next/link"
 import style from "@/app/styles/navbar.module.scss"
@@ -11,7 +10,7 @@ const NavBar:React.FC = () => {
                 <Image 
                     height={64}
                     width={64}
-                    src={noodles}
+                    src="/images/noodles.png"
                     alt={"NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOODLES"}
                     className={style.Icon}
                 />
