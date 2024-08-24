@@ -1,0 +1,75 @@
+.SelectDiv {
+    padding-bottom: 20px;
+    transition-duration:  0.15s; // Use max-height for a smoother transition
+    
+    max-height: 500px; // Set a high max-height for the open state
+  
+    svg{
+        rotate: 180deg;
+    }
+    h1{
+        font-size:24px;
+        font-weight: 100;
+    }
+
+    &.closed {
+      max-height: 50px; // Closed state
+      overflow: hidden;
+
+      svg{
+        rotate:0deg;
+      }
+    }
+  
+    .SelectOptionTitle {
+        height: 50px;
+        background-color: white;
+        cursor: pointer; // Adds a pointer cursor to indicate clickable element
+        display: flex;
+        align-items: center;
+        padding-left:25px;
+        border-bottom: solid black 3px;
+        justify-content: space-between;
+        padding-right:25px;
+        border-radius: 5px;
+        
+    }
+
+    .SelectGrid{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        padding-left:10px;
+        padding-top:15px;
+        gap:15px;
+
+        .SelectOption{
+            background-color: white;
+            width:128px;
+            height:128px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border:solid black 2px;
+            border-radius: 5px;
+        }
+    }
+
+    
+}
+  
+.IngredientDiv {
+    width: 600px;
+    margin-left:1000px;
+    margin-top:100px;
+    h1{
+        font-size:36px;
+        margin-bottom: 10px;
+        margin-left:10px;
+    }
+
+    .IngredientStack{
+        border-top:solid #DD7B7B 3px;
+        border-radius: 5px;
+    }
+}
+  
