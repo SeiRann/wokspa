@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import style from "@/app/styles/ingredientmenu.module.scss"
+import style from "@/app/client/styles/ingredientmenu.module.scss"
 import Arrow from "../../../../public/images/arrow.js"
 import { useState } from "react"
 

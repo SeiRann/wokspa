@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image"
 import Link from "next/link"
-import style from "@/app/styles/navbar.module.scss"
+import style from "@/app/client/styles/navbar.module.scss"
 
 const NavBar:React.FC = () => {
     return(
