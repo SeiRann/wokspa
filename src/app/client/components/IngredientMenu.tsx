@@ -2,27 +2,35 @@
 "use client"
 import style from "@/app/client/styles/ingredientmenu.module.scss"
 import Arrow from "../../../../public/images/arrow.js"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { noodlesChanged,ingredientRemoved,ingredientAdded } from "@/app/redux/slices/wokSlice.ts"
+import { useAppStore,useAppSelector } from "@/app/redux/hooks.ts"
+
 
 type Ingredient = {
   name:string,
   image:string
 }
 
+
+
 interface IngredientSelectProps {
     optionTitle: string
     options: Ingredient[],
+    multipleSelection: boolean,
+    onClick?: (payload:string)=>void,
 }
   
-const IngredientSelect: React.FC<IngredientSelectProps> = ({ optionTitle, options}) => {
+const IngredientSelect: React.FC<IngredientSelectProps> = ({ optionTitle, options, multipleSelection, onClick}) => {
   const  [closed,setClosed] = useState(true)
-
+  
   const toggleClosed = () => {
       setClosed(!closed)
   }
 
+
   return (
-      <div className={`${style.SelectDiv} ${closed? style.closed:""}`}>
+      <div className={`${style.SelectDiv} ${closed ? style.closed:""}`}>
         <div className={style.SelectOptionTitle} onClick={toggleClosed}>
           <h2>{optionTitle}</h2>
           <Arrow size={0.2}  strokeWidth={2} fillColor="black"/>
@@ -32,7 +40,7 @@ const IngredientSelect: React.FC<IngredientSelectProps> = ({ optionTitle, option
             const optionId=`${optionTitle}-${option.name}`
             return  <div className={style.SelectOption} key={option.name}>
                     <div className={style.RadioBox}> 
-                      <input type="radio" id={optionId} name={optionTitle} value={option.name}/>
+                      <input type={multipleSelection? "checkbox":"radio"} id={optionId} name={optionTitle} value={option.name} onClick={() =>onClick && onClick(option.name)}/>
                     </div>
                       <label htmlFor={optionId}>
                       <img src={option.image} alt="image" />
@@ -62,19 +70,24 @@ const IngredientExample = [
 ]
 
 const IngredientMenu:React.FC = () => {
+  const store = useAppStore()
 
 
   return(
       <div className={style.IngredientDiv}>
           <h1>Ingredients</h1>
           <div className={style.IngredientStack}>
-            <IngredientSelect optionTitle="Noodles" options={IngredientInfo}/>
-            <IngredientSelect optionTitle="Mushrooms" options={IngredientExample}/>
-            <IngredientSelect optionTitle="Vegetables" options={IngredientExample}/>
-            <IngredientSelect optionTitle="Sauces" options={IngredientExample}/>
+            <IngredientSelect multipleSelection={false} optionTitle="Noodles" options={IngredientInfo} onClick={(payload)=>{
+              console.log(payload)
+              store.dispatch(noodlesChanged({noodlesSelected:payload}))
+
+            }}/>
+            <IngredientSelect multipleSelection={true} optionTitle="Mushrooms" options={IngredientExample}/>
+            <IngredientSelect multipleSelection={true} optionTitle="Vegetables" options={IngredientExample}/>
+            <IngredientSelect multipleSelection={true} optionTitle="Sauces" options={IngredientExample}/>
             <div className={style.IngredientStackButtons}>
               <button className={style.ResetButton}>Reset</button>
-              <button className={style.OrderButton}>Order</button>
+              <button className={style.OrderButton} onClick={()=>console.log(store.getState())}>Order</button>
             </div>
           </div>
       </div>
